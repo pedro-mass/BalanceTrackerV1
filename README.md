@@ -36,4 +36,4 @@
 ## ToDo
 - add lint file
 - create the database in firebase
-- import Login form from previous project
+- import Login form from previous project - just UI
