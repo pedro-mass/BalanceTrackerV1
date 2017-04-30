@@ -34,4 +34,6 @@
 
 
 ## ToDo
-- create the database in firebase
+- make the login page work
+- add router
+- create second route to Balance display page (can just be holder text)
