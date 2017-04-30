@@ -1,0 +1,3 @@
+rootProject.name = 'BalanceTrackerV1'
+
+include ':app'
