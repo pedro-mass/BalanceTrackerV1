@@ -35,5 +35,9 @@
 
 ## ToDo
 - make the login page work
+  - using redux
 - add router
 - create second route to Balance display page (can just be holder text)
+  - be able to login
+  - goes to the next page
+  - doesn't have a go-back to the login
