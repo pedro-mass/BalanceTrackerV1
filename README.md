@@ -24,13 +24,14 @@
   - Basic input for the amount
 - Simple CRUD transactions
   - Everything is a basic input
-  
+
 ## Data Model
 - Current balance
 - List of transactions
   - Date time (computed on time of input)
-  - Amount 
+  - Amount
   - Note (optional field)
 
 
-
+## ToDo
+- add lint file
