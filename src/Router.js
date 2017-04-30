@@ -4,7 +4,7 @@ import LoginForm from './components/LoginForm';
 
 const RouterComponent = () => {
   return (
-    <Router>
+    <Router sceneStyle={{ paddingTop: 65 }}>
       <Scene key="auth">
         <Scene
           key="login"
@@ -14,7 +14,7 @@ const RouterComponent = () => {
         />
       </Scene>
     </Router>
-  )
+  );
 };
 
 export default RouterComponent;
