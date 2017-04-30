@@ -35,4 +35,3 @@
 
 ## ToDo
 - create the database in firebase
-- import Login form from previous project - just UI
