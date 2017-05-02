@@ -34,6 +34,5 @@
 
 
 ## ToDo
-- UI for the balance page
 - wire up redux
 - connect to firebase
