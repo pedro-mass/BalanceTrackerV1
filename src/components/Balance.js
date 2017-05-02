@@ -1,25 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { balanceUpdate } from '../actions';
 
 class Balance extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      balance: 40,
-    };
-  }
-
   updateBalance(amount) {
-    this.setState(prevState => ({
-      balance: prevState.balance + amount
-    }));
+    this.props.balanceUpdate({ amount });
   }
 
   clearBalance() {
-    this.setState({
-      balance: 0
-    });
+
   }
 
   render() {
@@ -34,7 +24,7 @@ class Balance extends Component {
           </TouchableOpacity>
 
           <Text style={styles.balance}>
-            {this.state.balance}
+            {this.props.balance}
           </Text>
 
           <TouchableOpacity onPress={() => this.updateBalance(-1)}>
@@ -84,4 +74,12 @@ const styles = StyleSheet.create({
   }
 });
 
-export default Balance;
+const mapStateToProps = (state) => {
+  const { balance } = state.balance;
+
+  return { balance };
+};
+
+export default connect(mapStateToProps, {
+  balanceUpdate
+})(Balance);

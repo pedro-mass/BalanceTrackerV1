@@ -34,5 +34,4 @@
 
 
 ## ToDo
-- wire up redux
 - connect to firebase
