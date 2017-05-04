@@ -34,6 +34,5 @@
 
 
 ## ToDo
-- connect to firebase
 - create form for +/-
 - skeleton for transactions list scene
