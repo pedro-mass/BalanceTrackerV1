@@ -34,13 +34,13 @@ class Balance extends Component {
             </Text>
           </View>
 
-          {this.displayAction()}
+          {this.displayActions()}
         </View>
       );
     }
   }
 
-  displayAction() {
+  displayActions() {
     return (
       <View style={[styles.actionDisplay]}>
         <Button onPress={this.addTransaction.bind(this)}>Add</Button>
