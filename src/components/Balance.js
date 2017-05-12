@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import { balanceFetch, balanceUpdate } from '../actions';
-import { Spinner } from './common';
+import { Spinner, Button } from './common';
 
 class Balance extends Component {
   componentWillMount() {
@@ -17,49 +17,67 @@ class Balance extends Component {
     this.props.balanceUpdate({ balance: balance + amount });
   }
 
-  displayBalance() {
+  displayLoading() {
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
+  }
 
+  displayBalance() {
+    if (!this.props.loading) {
+      return (
+        <View style={[styles.defaultView]}>
+          <View style={styles.balanceDisplay}>
+            <Text style={styles.balance}>
+              {this.props.balance}
+            </Text>
+          </View>
+
+          {this.displayAction()}
+        </View>
+      );
+    }
+  }
+
+  displayAction() {
     return (
-      <View style={styles.balanceDisplay}>
-        <TouchableOpacity onPress={() => this.updateBalance(1)}>
-          <Text style={styles.touchText}>
-            +
-          </Text>
-        </TouchableOpacity>
-
-        <Text style={styles.balance}>
-          {this.props.balance}
-        </Text>
-
-        <TouchableOpacity onPress={() => this.updateBalance(-1)}>
-          <Text style={styles.touchText}>
-            -
-          </Text>
-        </TouchableOpacity>
+      <View style={[styles.actionDisplay]}>
+        <Button>Add</Button>
+        <Button>View All</Button>
       </View>
     );
   }
 
   render() {
     return (
-      <View style={{ flex: 1 }}>
-        <View style={styles.balanceDisplay}>
+      <View style={styles.defaultView}>
+          {this.displayLoading()}
+
           {this.displayBalance()}
-        </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  defaultView: {
+    flex: 1
+  },
+  layoutDebug: {
+    borderRadius: 4,
+    borderWidth: 0.5,
+    borderColor: 'red'
+  },
   balanceDisplay: {
     flex: 2,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  actionDisplay: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 10
   },
   moreOptions: {
     flex: 1,
