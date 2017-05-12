@@ -34,7 +34,6 @@
 
 
 ## ToDo
-- create form for +/-
-  - include the logic for making this a transaction
+- include the logic for making this a transaction
 - skeleton for transactions list scene
 - wire up the transaction from firebase

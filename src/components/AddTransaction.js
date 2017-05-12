@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { balanceUpdate } from '../actions';
-import { Button, Input, CardSection } from './common';
+import { Button, Input } from './common';
 
 class AddTransaction extends Component {
   render() {
