@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { balanceFetch, balanceUpdate } from '../actions';
+import { Actions } from 'react-native-router-flux';
+import { balanceFetch } from '../actions';
 import { Spinner, Button } from './common';
 
 class Balance extends Component {
@@ -9,18 +10,18 @@ class Balance extends Component {
     this.props.balanceFetch();
   }
 
-  updateBalance(amount) {
-    let { balance } = this.props;
-    // default to 0 of null balance
-    balance = balance || 0;
-
-    this.props.balanceUpdate({ balance: balance + amount });
-  }
-
   displayLoading() {
     if (this.props.loading) {
       return <Spinner size="large" />;
     }
+  }
+
+  addTransaction() {
+    Actions.addTransaction();
+  }
+
+  viewTransactions() {
+    Actions.viewTransactions();
   }
 
   displayBalance() {
@@ -42,8 +43,8 @@ class Balance extends Component {
   displayAction() {
     return (
       <View style={[styles.actionDisplay]}>
-        <Button>Add</Button>
-        <Button>View All</Button>
+        <Button onPress={this.addTransaction.bind(this)}>Add</Button>
+        <Button onPress={this.viewTransactions.bind(this)}>View All</Button>
       </View>
     );
   }
@@ -103,5 +104,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  balanceFetch, balanceUpdate
+  balanceFetch
 })(Balance);

@@ -2,6 +2,8 @@ import React from 'react';
 import { Router, Scene } from 'react-native-router-flux';
 import LoginForm from './components/LoginForm';
 import Balance from './components/Balance';
+import AddTransaction from './components/AddTransaction';
+import ViewTransactions from './components/ViewTransactions';
 
 const RouterComponent = () => {
   return (
@@ -21,6 +23,18 @@ const RouterComponent = () => {
           component={Balance}
           title="Balance"
           initial
+        />
+
+        <Scene
+          key="addTransaction"
+          component={AddTransaction}
+          title="Add Transaction"
+        />
+
+        <Scene
+          key="viewTransactions"
+          component={ViewTransactions}
+          title="View Transaction"
         />
       </Scene>
     </Router>
