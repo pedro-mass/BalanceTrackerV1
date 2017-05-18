@@ -34,6 +34,6 @@
 
 
 ## ToDo
-- include the logic for making this a transaction
+- connect Add Transactions page to firebase
 - skeleton for transactions list scene
 - wire up the transaction from firebase

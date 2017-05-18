@@ -1,10 +1,28 @@
 import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
+import { Actions } from 'react-native-router-flux';
 import { balanceUpdate } from '../actions';
 import { Button, Input } from './common';
 
 class AddTransaction extends Component {
+  displayActions() {
+    return (
+      <View style={styles.supportView}>
+        <Button onPress={this.addTransaction.bind(this)}>Save</Button>
+        <Button onPress={this.cancel.bind(this)}>Cancel</Button>
+      </View>
+    );
+  }
+
+  addTransaction() {
+    console.log('transaction added: ', this.props);
+  }
+
+  cancel() {
+    Actions.pop();
+  }
+
   render() {
     return (
       <View style={styles.defaultView}>
@@ -36,10 +54,7 @@ class AddTransaction extends Component {
           </View>
         </View>
 
-        <View style={styles.supportView}>
-          <Button>Save</Button>
-          <Button>Cancel</Button>
-        </View>
+        {this.displayActions()}
       </View>
     );
   }

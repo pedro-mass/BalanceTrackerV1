@@ -8,7 +8,7 @@ import ViewTransactions from './components/ViewTransactions';
 const RouterComponent = () => {
   return (
     <Router sceneStyle={{ paddingTop: 65 }}>
-      <Scene key="auth">
+      <Scene key="auth" initial>
         <Scene
           key="login"
           component={LoginForm}
@@ -17,19 +17,17 @@ const RouterComponent = () => {
         />
       </Scene>
 
-      <Scene key="main" initial>
+      <Scene key="main">
         <Scene
           key="balance"
           component={Balance}
           title="Balance"
         />
 
-        {/* TODO: Remove initial from here and move to Balance when done */}
         <Scene
           key="addTransaction"
           component={AddTransaction}
           title="Add Transaction"
-          initial
         />
 
         <Scene
