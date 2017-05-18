@@ -68,7 +68,7 @@ const getFirebaseRef = () => {
 };
 
 const getFirebaseRefTransactions = () => {
-  const ref = getFirebaseRefBaseString() + '/transactions';
+  const ref = `${getFirebaseRefBaseString()}/transactions`;
 
   return firebase.database().ref(ref);
 };
