@@ -2,10 +2,19 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { balanceUpdate } from '../actions';
+import { balanceUpdate, addTransaction } from '../actions';
 import { Button, Input } from './common';
 
 class AddTransaction extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      dateEntered: '5/11/17 9:00 PM',
+      amount: '23',
+      note: 'did it work?'
+    };
+  }
+
   displayActions() {
     return (
       <View style={styles.supportView}>
@@ -17,6 +26,10 @@ class AddTransaction extends Component {
 
   addTransaction() {
     console.log('transaction added: ', this.props);
+
+    const { dateEntered, amount, note } = this.state;
+
+    this.props.addTransaction({ dateEntered, amount, note });
   }
 
   cancel() {
@@ -31,6 +44,8 @@ class AddTransaction extends Component {
             <Input
               label="Entered"
               placeholder="5/11/17 9:00 PM"
+              value={this.state.dateEntered}
+              onChangeText={dateEntered => this.setState({ dateEntered })}
             />
           </View>
 
@@ -38,7 +53,8 @@ class AddTransaction extends Component {
             <Input
               label="Amount"
               placeholder="10"
-              keyboardType="number-pad"
+              value={this.state.amount}
+              onChangeText={amount => this.setState({ amount })}
             />
           </View>
 
@@ -50,6 +66,8 @@ class AddTransaction extends Component {
               numberOfLines={4}
               placeholder="note"
               placeholderTextColor="grey"
+              value={this.state.note}
+              onChangeText={note => this.setState({ note })}
             />
           </View>
         </View>
@@ -100,5 +118,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  balanceUpdate
+  balanceUpdate, addTransaction
 })(AddTransaction);

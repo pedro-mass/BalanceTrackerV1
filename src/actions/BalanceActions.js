@@ -1,4 +1,5 @@
 import firebase from 'firebase';
+import { Actions } from 'react-native-router-flux';
 
 import {
   BALANCE_FETCH,
@@ -14,8 +15,6 @@ export const balanceFetch = () => {
 
     balanceRef
       .on('value', snapshot => {
-        console.log('firebase loaded: ', snapshot);
-
         dispatch({
           type: BALANCE_FETCH_SUCCESS,
           payload: snapshot.val()
@@ -36,8 +35,40 @@ export const balanceUpdate = ({ balance }) => {
   };
 };
 
-const getFirebaseRef = () => {
+export const addTransaction = ({ dateEntered, amount, note }) => {
+  const balanceRef = getFirebaseRef();
+  const transactionsRef = getFirebaseRefTransactions();
+
+  console.log('{ dateEntered, amount, note }: ', { dateEntered, amount, note });
+
+  return () => {
+    // get the current balanceRef
+    balanceRef.toString();
+
+    // update that balance
+
+    // add the transaction
+    transactionsRef
+      .push({ dateEntered, amount, note })
+      .then(() => {
+        // go back a page
+        Actions.pop();
+      });
+  };
+};
+
+const getFirebaseRefBaseString = () => {
   const { currentUser } = firebase.auth();
 
-  return firebase.database().ref(`/users/${currentUser.uid}`);
+  return `/users/${currentUser.uid}`;
+};
+
+const getFirebaseRef = () => {
+  return firebase.database().ref(getFirebaseRefBaseString());
+};
+
+const getFirebaseRefTransactions = () => {
+  const ref = getFirebaseRefBaseString() + '/transactions';
+
+  return firebase.database().ref(ref);
 };
