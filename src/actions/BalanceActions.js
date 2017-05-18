@@ -37,38 +37,46 @@ export const balanceUpdate = ({ balance }) => {
 
 export const addTransaction = ({ dateEntered, amount, note }) => {
   const balanceRef = getFirebaseRef();
-  const transactionsRef = getFirebaseRefTransactions();
+  const transactionsRef = getFirebaseRef('transactions');
 
   console.log('{ dateEntered, amount, note }: ', { dateEntered, amount, note });
 
   return () => {
     // get the current balanceRef
-    balanceRef.toString();
+    // TODO: get this from state instead of another call to firebase
+    balanceRef.once('value')
+      .then((snapshot) => {
+          let balance = snapshot.val().balance;
 
-    // update that balance
+          // update that balances
+          if (balance) {
+            balance = parseInt(balance, 10) + parseInt(amount, 10);
+          } else {
+            balance = parseInt(amount, 10);
+          }
 
-    // add the transaction
-    transactionsRef
-      .push({ dateEntered, amount, note })
-      .then(() => {
-        // go back a page
-        Actions.pop();
-      });
-  };
+          balanceRef.update({ balance })
+          .then(() => {
+            // add the transaction
+            transactionsRef
+              .push({ dateEntered, amount, note })
+              .then(() => {
+                // go back a page
+                Actions.pop();
+              });
+          });
+        });
+      };
 };
 
-const getFirebaseRefBaseString = () => {
+const getFirebaseRef = (innerPath) => {
   const { currentUser } = firebase.auth();
 
-  return `/users/${currentUser.uid}`;
-};
+  let ref = `/users/${currentUser.uid}`;
 
-const getFirebaseRef = () => {
-  return firebase.database().ref(getFirebaseRefBaseString());
-};
-
-const getFirebaseRefTransactions = () => {
-  const ref = `${getFirebaseRefBaseString()}/transactions`;
+  if (innerPath) {
+    ref = `${ref}/${innerPath}`;
+  }
 
   return firebase.database().ref(ref);
 };

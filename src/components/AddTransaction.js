@@ -25,10 +25,7 @@ class AddTransaction extends Component {
   }
 
   addTransaction() {
-    console.log('transaction added: ', this.props);
-
     const { dateEntered, amount, note } = this.state;
-
     this.props.addTransaction({ dateEntered, amount, note });
   }
 
