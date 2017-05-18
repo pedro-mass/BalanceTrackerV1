@@ -39,8 +39,7 @@ export const addTransaction = ({ dateEntered, amount, note }) => {
   const balanceRef = getFirebaseRef();
   const transactionsRef = getFirebaseRef('transactions');
 
-  console.log('{ dateEntered, amount, note }: ', { dateEntered, amount, note });
-
+  // TODO: rewrite this to use await/async
   return () => {
     // get the current balanceRef
     // TODO: get this from state instead of another call to firebase

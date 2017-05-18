@@ -34,7 +34,6 @@
 
 
 ## ToDo
-- connect Add Transactions page to firebase
-  - make sure the balance gets updated as well
 - skeleton for transactions list scene
 - wire up the transaction from firebase
+  - just cover loading the transactions
