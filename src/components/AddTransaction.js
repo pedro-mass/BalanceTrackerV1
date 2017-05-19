@@ -8,11 +8,25 @@ import { Button, Input } from './common';
 class AddTransaction extends Component {
   constructor(props) {
     super(props);
+
+    const now = this.getDateTimeString(new Date());
+
     this.state = {
-      dateEntered: '5/11/17 9:00 PM',
-      amount: '23',
-      note: 'did it work?'
+      dateEntered: now,
+      amount: '',
+      note: ''
     };
+  }
+
+  getDateTimeString(date) {
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    const hour = date.getHours();
+    const mins = date.getMinutes();
+
+    return `${month}/${day}/${year} ${hour}:${mins}`;
   }
 
   displayActions() {
