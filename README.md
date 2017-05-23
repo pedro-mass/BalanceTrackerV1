@@ -1,6 +1,6 @@
 # BalanceTrackerV1
 
-[V1 Doc](https://docs.google.com/document/d/1gmrmkgkAjpVgvJ6V99aVHv0MHc8gCWudD7LxsYWPmE4/edit?usp=sharing) | [Strides Tracker](https://my.stridesapp.com/#/tracker/target/03595251-f56c-5a62-933d-e51d3c303c29) | finish by 6/25/17
+[Mock Up](https://ninjamock.com/s/M2WMX) | [V1 Doc](https://docs.google.com/document/d/1gmrmkgkAjpVgvJ6V99aVHv0MHc8gCWudD7LxsYWPmE4/edit?usp=sharing) | [Strides Tracker](https://my.stridesapp.com/#/tracker/target/03595251-f56c-5a62-933d-e51d3c303c29) | finish by 6/25/17
 
 [Project Doc + future features](https://docs.google.com/document/d/1OhkVd_TcOeTCi1cv7xBFNa2n4NtmWVT_o-owZg4GOMw/edit?usp=sharing)
 
