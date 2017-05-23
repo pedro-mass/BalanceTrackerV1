@@ -39,3 +39,4 @@
   - just cover loading the transactions
 - add edit/delete to transaction
 - clear transactions
+- add indicator to List item if it has a note
