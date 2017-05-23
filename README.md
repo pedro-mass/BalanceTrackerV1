@@ -35,8 +35,7 @@
 
 ## ToDo
 - skeleton for transactions list scene
-- wire up the transaction from firebase
-  - just cover loading the transactions
+- wire up loading the transaction from firebase
 - add edit/delete to transaction
 - clear transactions
 - add indicator to List item if it has a note
