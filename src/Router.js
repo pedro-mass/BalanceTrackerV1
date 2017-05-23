@@ -34,6 +34,7 @@ const RouterComponent = () => {
           key="viewTransactions"
           component={ViewTransactions}
           title="View Transaction"
+          initial
         />
       </Scene>
     </Router>

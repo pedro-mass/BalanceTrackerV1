@@ -37,3 +37,5 @@
 - skeleton for transactions list scene
 - wire up the transaction from firebase
   - just cover loading the transactions
+- add edit/delete to transaction
+- clear transactions
