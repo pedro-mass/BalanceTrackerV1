@@ -1,22 +1,48 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ListView } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { balanceUpdate } from '../actions';
 import { Button } from './common';
+import TransactionListItem from './TransactionListItem';
 
-class ViewTransactions extends Component {
+class TransactionList extends Component {
+  constructor(props) {
+    super(props);
+
+    const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
+
+    this.state = {
+      dataSource: ds.cloneWithRows([
+        {
+          amount: '10',
+          dateEntered: '5/25/17 8:00 AM',
+          note: 'here we go'
+        },
+        {
+          amount: '20',
+          dateEntered: '5/25/17 8:30 AM',
+          note: 'here we go 2'
+        },
+        {
+          amount: '30',
+          dateEntered: '5/25/17 9:00 AM',
+          note: 'here we go 3'
+        },
+        {
+          amount: '4',
+          dateEntered: '5/25/17 9:00 AM',
+          note: 'here we go 4'
+        }
+      ])
+    };
+  }
+
   addTransaction() {
     Actions.addTransaction();
   }
 
   renderRow(transaction) {
-    return (
-      <View>
-        <Text>{transaction.dateEntered}</Text>
-        <Text>{transaction.amount}</Text>
-      </View>
-    );
+    return <TransactionListItem transaction={transaction} />;
   }
 
   render() {
@@ -31,7 +57,10 @@ class ViewTransactions extends Component {
 
           {/* List Items */}
           <View style={styles.listSection}>
-            <Text>Item</Text>
+            <ListView
+              dataSource={this.state.dataSource}
+              renderRow={this.renderRow}
+            />
           </View>
         </View>
 
@@ -70,10 +99,8 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#ddd',
     margin: 5,
-    padding: 5,
     marginBottom: 10,
     backgroundColor: '#fff',
-
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.1,
@@ -87,6 +114,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {
-  balanceUpdate
-})(ViewTransactions);
+export default connect(mapStateToProps, {})(TransactionList);

@@ -5,7 +5,7 @@ import { Actions } from 'react-native-router-flux';
 import { balanceUpdate, addTransaction } from '../actions';
 import { Button, Input } from './common';
 
-class AddTransaction extends Component {
+class TransactionAdd extends Component {
   constructor(props) {
     super(props);
 
@@ -130,4 +130,4 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
   balanceUpdate, addTransaction
-})(AddTransaction);
+})(TransactionAdd);
