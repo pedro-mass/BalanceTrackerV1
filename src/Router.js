@@ -23,6 +23,7 @@ const RouterComponent = () => {
           key="balance"
           component={Balance}
           title="Balance"
+          initial
         />
 
         <Scene
@@ -35,7 +36,6 @@ const RouterComponent = () => {
           key="viewTransactions"
           component={TransactionList}
           title="View Transaction"
-          initial
         />
 
         <Scene

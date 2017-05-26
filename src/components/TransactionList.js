@@ -1,3 +1,4 @@
+import _ from 'lodash';
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, ListView } from 'react-native';
 import { connect } from 'react-redux';
@@ -9,32 +10,21 @@ class TransactionList extends Component {
   constructor(props) {
     super(props);
 
+    this.createDataSource(this.props);
+  }
+
+  // this needs to run every time the props change, so our list grows
+  componentWillReceiveProps(nextProps) {
+    // nextProps are the next set of props that this component
+    // will be rendered with
+    // this.props is still the old set of props
+    this.createDataSource(nextProps);
+  }
+
+  createDataSource({ transactions }) {
     const ds = new ListView.DataSource({ rowHasChanged: (r1, r2) => r1 !== r2 });
 
-    this.state = {
-      dataSource: ds.cloneWithRows([
-        {
-          amount: '10',
-          dateEntered: '5/25/17 8:00 AM',
-          note: 'here we go'
-        },
-        {
-          amount: '20',
-          dateEntered: '5/25/17 8:30 AM',
-          note: 'here we go 2'
-        },
-        {
-          amount: '30',
-          dateEntered: '5/25/17 9:00 AM',
-          note: 'here we go 3'
-        },
-        {
-          amount: '4',
-          dateEntered: '5/25/17 9:00 AM',
-          note: 'here we go 4'
-        }
-      ])
-    };
+    this.dataSource = ds.cloneWithRows(transactions);
   }
 
   addTransaction() {
@@ -58,7 +48,7 @@ class TransactionList extends Component {
           {/* List Items */}
           <View style={styles.listSection}>
             <ListView
-              dataSource={this.state.dataSource}
+              dataSource={this.dataSource}
               renderRow={this.renderRow}
             />
           </View>
@@ -110,7 +100,11 @@ const styles = StyleSheet.create({
 
 const mapStateToProps = (state) => {
   if (state.balance) {
-    return { ...state.balance };
+    const transactions = _.map(state.balance.transactions, (val, uid) => {
+      return { ...val, uid };
+    });
+
+    return { transactions };
   }
 };
 
