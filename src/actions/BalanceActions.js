@@ -24,18 +24,12 @@ export const balanceFetch = () => {
 };
 
 export const balanceUpdate = ({ balance, transaction, newTransaction }) => {
-  console.log('balance', balance);
-  console.log('transaction', transaction);
-  console.log('newTransaction', newTransaction);
-
   if (!newTransaction) {
     // regular balance add
     return addTransaction(transaction);
   }
 
-  return (dispatch) => {
-    dispatch({ type: 'TEST' });
-
+  return () => {
     let newBalance = parseInt(balance, 10);
     newBalance -= parseInt(transaction.amount, 10);
     newBalance += parseInt(newTransaction.amount, 10);
@@ -88,6 +82,25 @@ export const addTransaction = ({ dateEntered, amount, note }) => {
           });
         });
       };
+};
+
+export const deleteTransaction = ({ balance, transaction }) => {
+  return () => {
+    let newBalance = parseInt(balance, 10);
+    newBalance -= parseInt(transaction.amount, 10);
+
+    const balanceRef = getFirebaseRef();
+    balanceRef.update({ balance: newBalance })
+      .then(() => {
+        // update the transaction
+        const transactionsRef = getFirebaseRef(`transactions/${transaction.uid}`);
+        transactionsRef.remove()
+          .then(() => {
+            // go back a page
+            Actions.pop();
+          });
+      });
+  };
 };
 
 const getFirebaseRef = (innerPath) => {
