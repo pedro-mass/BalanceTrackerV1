@@ -23,15 +23,37 @@ export const balanceFetch = () => {
   };
 };
 
-export const balanceUpdate = ({ balance }) => {
-  const balanceRef = getFirebaseRef();
+export const balanceUpdate = ({ balance, transaction, newTransaction }) => {
+  console.log('balance', balance);
+  console.log('transaction', transaction);
+  console.log('newTransaction', newTransaction);
 
-  return () => {
-    balanceRef
-      .update({ balance })
-      .then(() => {
-        console.log('Successfully saved!');
-      });
+  if (!newTransaction) {
+    // regular balance add
+    return addTransaction(transaction);
+  }
+
+  return (dispatch) => {
+    dispatch({ type: 'TEST' });
+
+    let newBalance = parseInt(balance, 10);
+    newBalance -= parseInt(transaction.amount, 10);
+    newBalance += parseInt(newTransaction.amount, 10);
+
+    const balanceRef = getFirebaseRef();
+    balanceRef.update({ balance: newBalance })
+    .then(() => {
+      // update the transaction
+      const transactionsRef = getFirebaseRef(`transactions/${transaction.uid}`);
+      const { dateEntered, amount, note } = newTransaction;
+
+      transactionsRef
+        .set({ dateEntered, amount, note })
+        .then(() => {
+          // go back a page
+          Actions.pop();
+        });
+    });
   };
 };
 

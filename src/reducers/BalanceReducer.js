@@ -1,5 +1,4 @@
 import {
-  BALANCE_UPDATE,
   BALANCE_FETCH,
   BALANCE_FETCH_SUCCESS
 } from '../actions/types';
@@ -19,11 +18,6 @@ export default (state = INITIAL_STATE, action) => {
       };
     case BALANCE_FETCH_SUCCESS:
       return action.payload;
-    case BALANCE_UPDATE:
-      return {
-        ...state,
-        balance: state.balance + action.payload
-      };
     default:
       return state;
   }

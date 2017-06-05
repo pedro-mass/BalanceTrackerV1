@@ -2,17 +2,15 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-// import { balanceUpdate, addTransaction } from '../actions';
+import { balanceUpdate } from '../actions';
 import { Button, Input } from './common';
 
 class TransactionEdit extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { ...this.props.transaction };
-
-    console.log('props: ', this.props);
-    console.log('state: ', this.state);
+    // set the state equal to the passed in transaction
+    this.state = { ...props.transaction };
   }
 
   getDateTimeString(date) {
@@ -29,17 +27,18 @@ class TransactionEdit extends Component {
   displayActions() {
     return (
       <View style={styles.supportView}>
-        <Button onPress={this.addTransaction.bind(this)}>Save</Button>
+        <Button onPress={this.saveTransaction.bind(this)}>Save</Button>
         <Button onPress={this.cancel.bind(this)}>Cancel</Button>
       </View>
     );
   }
 
-  addTransaction() {
-    // const { dateEntered, amount, note } = this.state;
-    // this.props.addTransaction({ dateEntered, amount, note });
-
-    console.log('transaction saved');
+  saveTransaction() {
+    this.props.balanceUpdate({
+      balance: this.props.balance,
+      transaction: this.props.transaction,
+      newTransaction: this.state
+    });
   }
 
   cancel() {
@@ -127,4 +126,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, {})(TransactionEdit);
+export default connect(mapStateToProps, {
+  balanceUpdate
+})(TransactionEdit);
