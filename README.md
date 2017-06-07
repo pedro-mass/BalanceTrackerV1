@@ -42,3 +42,5 @@
 - "freeze" the save button so that they can't press it twice
 - have a delete confirmation
 - validation on the balance add/edit form
+- logout button
+  - place on the Balance page
