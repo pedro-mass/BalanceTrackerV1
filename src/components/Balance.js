@@ -16,21 +16,13 @@ class Balance extends Component {
     }
   }
 
-  addTransaction() {
-    Actions.addTransaction();
-  }
-
-  viewTransactions() {
-    Actions.viewTransactions();
-  }
-
   displayBalance() {
     if (!this.props.loading) {
       return (
         <View style={[styles.defaultView]}>
           <View style={styles.balanceDisplay}>
             <Text style={styles.balance}>
-              {this.props.balance}
+              {this.props.balance || 0}
             </Text>
           </View>
 
@@ -47,6 +39,14 @@ class Balance extends Component {
         <Button onPress={this.viewTransactions.bind(this)}>View All</Button>
       </View>
     );
+  }
+
+  addTransaction() {
+    Actions.addTransaction();
+  }
+
+  viewTransactions() {
+    Actions.viewTransactions();
   }
 
   render() {

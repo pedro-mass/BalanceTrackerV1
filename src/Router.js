@@ -5,6 +5,7 @@ import Balance from './components/Balance';
 import TransactionAdd from './components/TransactionAdd';
 import TransactionList from './components/TransactionList';
 import TransactionEdit from './components/TransactionEdit';
+import { clearAll } from './actions';
 
 const RouterComponent = () => {
   return (
@@ -36,6 +37,8 @@ const RouterComponent = () => {
           key="viewTransactions"
           component={TransactionList}
           title="View Transaction"
+          onRight={() => clearAll()}
+          rightTitle="Clear All"
         />
 
         <Scene

@@ -51,37 +51,29 @@ export const balanceUpdate = ({ balance, transaction, newTransaction }) => {
   };
 };
 
-export const addTransaction = ({ dateEntered, amount, note }) => {
+export const addTransaction = ({ balance, dateEntered, amount, note }) => {
   const balanceRef = getFirebaseRef();
   const transactionsRef = getFirebaseRef('transactions');
-
-  // TODO: rewrite this to use await/async
+  
   return () => {
-    // get the current balanceRef
-    // TODO: get this from state instead of another call to firebase
-    balanceRef.once('value')
-      .then((snapshot) => {
-          let balance = snapshot.val().balance;
+    let newBalance = 0;
+    if (balance) {
+      newBalance = parseInt(balance, 10) + parseInt(amount, 10);
+    } else {
+      newBalance = parseInt(amount, 10);
+    }
 
-          // update that balances
-          if (balance) {
-            balance = parseInt(balance, 10) + parseInt(amount, 10);
-          } else {
-            balance = parseInt(amount, 10);
-          }
-
-          balanceRef.update({ balance })
-          .then(() => {
-            // add the transaction
-            transactionsRef
-              .push({ dateEntered, amount, note })
-              .then(() => {
-                // go back a page
-                Actions.pop();
-              });
-          });
+    balanceRef.update({ balance: newBalance })
+    .then(() => {
+      // add the transaction
+      transactionsRef
+        .push({ dateEntered, amount, note })
+        .then(() => {
+          // go back a page
+          Actions.pop();
         });
-      };
+    });
+  };
 };
 
 export const deleteTransaction = (balance, transaction) => {
@@ -101,6 +93,14 @@ export const deleteTransaction = (balance, transaction) => {
           });
       });
   };
+};
+
+export const clearAll = () => {
+  const balanceRef = getFirebaseRef();
+  balanceRef.remove()
+    .then(() => {
+      Actions.pop();
+    });
 };
 
 const getFirebaseRef = (innerPath) => {

@@ -106,6 +106,8 @@ const mapStateToProps = (state) => {
 
     return { transactions };
   }
+
+  return { transactions: [] };
 };
 
 export default connect(mapStateToProps, {})(TransactionList);

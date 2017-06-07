@@ -40,7 +40,9 @@ class TransactionAdd extends Component {
 
   addTransaction() {
     const { dateEntered, amount, note } = this.state;
-    this.props.addTransaction({ dateEntered, amount, note });
+    const { balance } = this.props;
+
+    this.props.addTransaction({ balance, dateEntered, amount, note });
   }
 
   cancel() {
@@ -126,6 +128,8 @@ const mapStateToProps = (state) => {
   if (state.balance) {
     return { ...state.balance };
   }
+
+  return {};
 };
 
 export default connect(mapStateToProps, {

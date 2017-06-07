@@ -40,3 +40,4 @@
 - organize state so that we're not referencing it like this: state.balance.balance
 - "freeze" the save button so that they can't press it twice
 - have a delete confirmation
+- validation on the balance add/edit form
