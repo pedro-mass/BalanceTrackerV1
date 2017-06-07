@@ -34,8 +34,9 @@
 
 
 ## ToDo
-- edit/delete to transaction
 - clear transactions
 - add indicator to List item if it has a note
 - clean up Add/Edit, so that they're using the same form
 - organize state so that we're not referencing it like this: state.balance.balance
+- "freeze" the save button so that they can't press it twice
+- have a delete confirmation

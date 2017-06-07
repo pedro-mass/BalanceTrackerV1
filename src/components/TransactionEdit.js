@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, TextInput } from 'react-native';
 import { connect } from 'react-redux';
 import { Actions } from 'react-native-router-flux';
-import { balanceUpdate } from '../actions';
+import { balanceUpdate, deleteTransaction } from '../actions';
 import { Button, Input } from './common';
 
 class TransactionEdit extends Component {
@@ -28,7 +28,7 @@ class TransactionEdit extends Component {
     return (
       <View style={styles.supportView}>
         <Button onPress={this.saveTransaction.bind(this)}>Save</Button>
-        <Button onPress={this.cancel.bind(this)}>Cancel</Button>
+        <Button onPress={this.deleteTransaction.bind(this)}>Delete</Button>
       </View>
     );
   }
@@ -39,6 +39,10 @@ class TransactionEdit extends Component {
       transaction: this.props.transaction,
       newTransaction: this.state
     });
+  }
+
+  deleteTransaction() {
+    this.props.deleteTransaction(this.props.balance, this.props.transaction);
   }
 
   cancel() {
@@ -127,5 +131,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  balanceUpdate
+  balanceUpdate, deleteTransaction
 })(TransactionEdit);

@@ -84,7 +84,7 @@ export const addTransaction = ({ dateEntered, amount, note }) => {
       };
 };
 
-export const deleteTransaction = ({ balance, transaction }) => {
+export const deleteTransaction = (balance, transaction) => {
   return () => {
     let newBalance = parseInt(balance, 10);
     newBalance -= parseInt(transaction.amount, 10);
