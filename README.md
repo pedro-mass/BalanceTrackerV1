@@ -34,6 +34,8 @@
 
 
 ## ToDo
+- update ReadMe to state how to run the application
+  - include setup link to our version of React-Native (this captures the xCode install)
 - add indicator to List item if it has a note
 - clean up Add/Edit, so that they're using the same form
 - organize state so that we're not referencing it like this: state.balance.balance
